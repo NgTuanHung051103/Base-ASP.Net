@@ -9,9 +9,9 @@ using System.Collections.Generic;
 
 namespace PokemonReviewApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/owner")]
     [ApiController]
-    public class OwnerController : Controller
+    public class OwnerController : BaseController
     {
         private readonly IOwnerRepository _ownerRepository;
         private readonly ICountryRepository _countryRepository;
@@ -21,7 +21,7 @@ namespace PokemonReviewApp.Controllers
         public OwnerController(IOwnerRepository ownerRepository, 
             ICountryRepository countryRepository,
             IMapper mapper,
-            IOwnerServices ownerServices)
+            IOwnerServices ownerServices) : base()
         {
             _ownerRepository = ownerRepository;
             _countryRepository = countryRepository;
@@ -30,7 +30,7 @@ namespace PokemonReviewApp.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Owner>))]
+        //[ProducesResponseType(200, Type = typeof(IEnumerable<Owner>))]
         public async ValueTask<IActionResult> GetOwners()
         {
             var listOwners = await _ownerServices.GetAllOwnersAsync();
